@@ -17,7 +17,6 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async authenticateUser({ username, password }: UserPayloadInterface) {
             // useFetch from nuxt 3
-            // @ts-ignore
             const { data, pending }: any = await useFetch('http://localhost:8000/api/auth/login', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -38,19 +37,6 @@ export const useAuthStore = defineStore('auth', {
                     method: 'post',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer' + data?.value?.access_token },
                 });
-            }
-        },
-        async refreshToken() {
-            const { data, pending }: any = await useFetch('http://localhost:8000/api/auth/me', {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer' + useCookie('token') }
-            });
-
-                const token = useCookie('token');
-            if (data.value) {
-                // @ts-ignore
-                token.value = data?.value?.access_token;
-                this.authUser = data?.value;
             }
         },
         logUserOut() {

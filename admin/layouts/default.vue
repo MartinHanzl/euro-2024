@@ -94,20 +94,6 @@ useHead({
     class: 'h-full'
   }
 });
-
-const navigation = [
-  { name: 'Domů', href: '#', current: true },
-  { name: 'Základní skupina', href: '#', current: false },
-  { name: 'Vyřazovací část', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
-]
-
-const userNavigation = [
-  { name: 'Profil', href: '#' },
-  { name: 'Odhlásit se', href: '#' },
-]
-
 const sidebarOpen = ref(false)
 
 const {locale, locales} = useI18n()
@@ -119,8 +105,8 @@ const availableLocales = computed(() => {
 
 const router = useRouter();
 
-const { logUserOut, refreshToken } = useAuthStore();
-const { authenticated, authUser } = storeToRefs(useAuthStore());
+const { logUserOut } = useAuthStore();
+const { authUser } = storeToRefs(useAuthStore());
 
 // setTimeout(refreshToken, 60);
 
@@ -128,4 +114,23 @@ const logout = () => {
   logUserOut();
   router.push('/login');
 };
+
+const navigation = [
+  { name: 'Nástěnka', href: '#', current: true },
+  { name: 'Základní skupina', href: '#', current: false },
+  { name: 'Vyřazovací část', href: '#', current: false }
+]
+
+if (authUser.role === 'admin' || authUser.role === 'employee') {
+  navigation.push({name: 'Zápasy', href: '#'});
+}
+
+if (authUser.role === 'admin') {
+  navigation.push({name: 'Uživatelé', href: '#'});
+}
+
+const userNavigation = [
+  { name: 'Profil', href: '#' },
+  { name: 'Odhlásit se', href: '#' },
+]
 </script>

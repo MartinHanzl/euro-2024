@@ -8,6 +8,12 @@ export default defineNuxtConfig({
         }
     },
     devtools: {enabled: true},
+    components: [
+        {
+            path: '@/components',
+            pathPrefix: false
+        }
+    ],
     modules: [
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
