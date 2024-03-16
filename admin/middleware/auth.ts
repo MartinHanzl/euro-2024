@@ -1,27 +1,21 @@
 import {useAuthStore} from "~/store/auth";
 
 export default defineNuxtRouteMiddleware((to) => {
-    const {authenticated} = storeToRefs(useAuthStore()); // make authenticated state reactive
+    const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
     const token = useCookie('token'); // get token from cookies
-    const authUser = useCookie('authUser'); // get token from cookies
 
-    // @ts-ignore
     if (token.value) {
-        authenticated.value = true;
+        // check if value exists
+        authenticated.value = true; // update the state to authenticated
     }
 
-    // @ts-ignore
-    if (authUser.value) {
-        authenticated.value = true;
-    }
-
-    // @ts-ignore
-    if (token.value && authUser.value && to?.name === 'login') {
+    // if token exists and url is /login redirect to homepage
+    if (token.value && to?.name === 'login') {
         return navigateTo('/');
     }
 
-    // @ts-ignore
-    if (!token.value && authUser.value && to?.name !== 'login') {
+    // if token doesn't exist redirect to log in
+    if (!token.value && to?.name !== 'login') {
         abortNavigation();
         return navigateTo('/login');
     }
