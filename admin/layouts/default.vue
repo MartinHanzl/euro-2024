@@ -215,6 +215,8 @@ import {
   Cog8ToothIcon
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '@/store/auth';
 
 useHead({
   bodyAttrs: {
@@ -265,14 +267,15 @@ const switchLocalePath = useSwitchLocalePath()
 const availableLocales = computed(() => {
   return locales.value.filter(i => i.code !== locale.value)
 })
-</script>
 
-<script>
-export default {
-  colorMode: 'light',
-}
-// For Nuxt 3
-definePageMeta({
-  colorMode: 'light',
-})
+const router = useRouter();
+
+const { logUserOut } = useAuthStore();
+const { authenticated } = storeToRefs(useAuthStore());
+setTimeout()
+
+const logout = () => {
+  logUserOut();
+  router.push('/login');
+};
 </script>
