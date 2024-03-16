@@ -113,10 +113,10 @@
             </div>
             <div class="ml-3">
               <div class="text-base font-medium leading-none text-white">
-                {{ todo }}
+                {{ authUser.firstname + ' ' + authUser.lastname }}
               </div>
               <div class="text-sm font-medium leading-none text-gray-400">
-                {{ todo }}
+                {{ authUser.email }}
               </div>
             </div>
           </div>
@@ -138,13 +138,13 @@
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">
-          {{ authUser }}
+          Nástěnka
         </h1>
       </div>
     </header>
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        {{ authenticated }}
+        {{ $t('system.date') }}
         <p @click="logout">
           Logout
         </p>
@@ -168,15 +168,6 @@ useHead({
     class: 'h-full'
   }
 });
-const sidebarOpen = ref(false)
-
-const {locale, locales} = useI18n()
-const switchLocalePath = useSwitchLocalePath()
-
-const availableLocales = computed(() => {
-  return locales.value.filter(i => i.code !== locale.value)
-})
-
 const router = useRouter();
 
 const { logUserOut } = useAuthStore();
@@ -193,13 +184,13 @@ const navigation = [
   { name: 'Vyřazovací část', href: '#', current: false }
 ]
 
-/*if (authUser.role === 'admin' || authUser.role === 'employee') {
-  navigation.push({name: 'Zápasy', href: '#'});
+if (authUser.value.role === 'admin' || authUser.value.role === 'employee') {
+  navigation.push({name: 'Zápasy', href: '#', current: false});
 }
 
-if (authUser.role === 'admin') {
-  navigation.push({name: 'Uživatelé', href: '#'});
-}*/
+if (authUser.value.role === 'admin') {
+  navigation.push({name: 'Uživatelé', href: '#', current: false});
+}
 
 const userNavigation = [
   { name: 'Profil', href: '#' },
