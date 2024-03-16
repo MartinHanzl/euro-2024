@@ -1,7 +1,6 @@
 // store/auth.ts
 // @ts-ignore
 import { defineStore } from 'pinia';
-import auth from "~/middleware/auth";
 
 interface UserPayloadInterface {
     username: string;
@@ -11,8 +10,7 @@ interface UserPayloadInterface {
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
-        loading: false,
-        authUser: null
+        loading: false
     }),
     actions: {
         async authenticateUser({ username, password }: UserPayloadInterface) {
@@ -28,21 +26,28 @@ export const useAuthStore = defineStore('auth', {
             this.loading = pending;
 
             if (data.value) {
-                const token = useCookie('token'); // useCookie new hook in nuxt 3
+                const token = useCookie('token', {maxAge: 60*60*20*7}); // useCookie new hook in nuxt 3
                 // @ts-ignore
                 token.value = data?.value?.access_token; // set token to cookie
                 this.authenticated = true; // set authenticated  state value to true
 
-                this.authUser = await $fetch('http://localhost:8000/api/auth/me', {
+                const me = await $fetch('http://localhost:8000/api/auth/me', {
                     method: 'post',
                     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer' + data?.value?.access_token },
                 });
+
+                const authUser = useCookie('authUser', {maxAge: 60*60*24*14});
+                // @ts-ignore
+                authUser.value = me?.value;
             }
         },
         logUserOut() {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
+            const authUser = useCookie('authUser'); // useCookie new hook in nuxt 3
+
             this.authenticated = false; // set authenticated  state value to false
-            this.authUser = null;
+            // @ts-ignore
+            authUser.value = null; // clear the token cookie
             // @ts-ignore
             token.value = null; // clear the token cookie
         },
