@@ -270,9 +270,9 @@ const availableLocales = computed(() => {
 
 const router = useRouter();
 
-const { logUserOut } = useAuthStore();
+const { logUserOut, refreshToken } = useAuthStore();
 const { authenticated } = storeToRefs(useAuthStore());
-setTimeout()
+// setTimeout(refreshToken, 60*60);
 
 const logout = () => {
   logUserOut();

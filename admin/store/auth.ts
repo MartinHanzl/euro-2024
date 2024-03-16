@@ -1,6 +1,7 @@
 // store/auth.ts
 // @ts-ignore
 import { defineStore } from 'pinia';
+import {useRouter} from "#app";
 
 interface UserPayloadInterface {
     username: string;
@@ -39,8 +40,8 @@ export const useAuthStore = defineStore('auth', {
                 headers: { 'Content-Type': 'application/json', 'Authorization': useCookie('token') }
             });
 
-            if(data.value) {
                 const token = useCookie('token');
+            if (data.value) {
                 // @ts-ignore
                 token.value = data?.value?.access_token;
             }
