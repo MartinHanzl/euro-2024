@@ -17,13 +17,15 @@
             </div>
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
-                <a
+                <nuxt-link
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  :to="item.href"
                   :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
                   :aria-current="item.current ? 'page' : undefined"
-                >{{ item.name }}</a>
+                >
+                  {{ item.name }}
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -59,10 +61,12 @@
                       :key="item.name"
                       v-slot="{ active }"
                     >
-                      <a
-                        :href="item.href"
+                      <nuxt-link
+                        :to="item.href"
                         :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"
-                      >{{ item.name }}</a>
+                      >
+                        {{ item.name }}
+                      </nuxt-link>
                     </MenuItem>
                   </MenuItems>
                 </transition>
@@ -179,17 +183,17 @@ const logout = () => {
 };
 
 const navigation = [
-  { name: 'Nástěnka', href: '#', current: true },
-  { name: 'Základní skupina', href: '#', current: false },
-  { name: 'Vyřazovací část', href: '#', current: false }
+  { name: 'Nástěnka', href: '/', current: true },
+  { name: 'Základní skupina', href: '/zakladni-skupina', current: false },
+  { name: 'Vyřazovací část', href: '/vyrazovaci-cast', current: false }
 ]
 
 if (authUser.value.role === 'admin' || authUser.value.role === 'employee') {
-  navigation.push({name: 'Zápasy', href: '#', current: false});
+  navigation.push({name: 'Zápasy', href: '/zapasy', current: false});
 }
 
 if (authUser.value.role === 'admin') {
-  navigation.push({name: 'Uživatelé', href: '#', current: false});
+  navigation.push({name: 'Uživatelé', href: '/uzivatele', current: false});
 }
 
 const userNavigation = [
