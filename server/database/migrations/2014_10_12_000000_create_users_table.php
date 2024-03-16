@@ -17,9 +17,9 @@ return new class extends Migration {
             $table->string('phone_prefix')->default('+420');
             $table->string('phone')->nullable();
             $table->string('email');
-            $table->string('street')->nullable();
+            /*$table->string('street')->nullable();
             $table->integer('postcode')->nullable();
-            $table->integer('city')->nullable();
+            $table->integer('city')->nullable();*/
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('verification_code', 64)->nullable();
@@ -27,6 +27,7 @@ return new class extends Migration {
             $table->smallInteger('active')->default(0);
             $table->smallInteger('verified')->default(0);
             $table->rememberToken();
+            $table->integer('points')->default(0);
             $table->timestamps();
         });
     }

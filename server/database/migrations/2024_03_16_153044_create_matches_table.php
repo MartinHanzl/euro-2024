@@ -31,6 +31,7 @@ return new class extends Migration {
             $table->integer('away_goals')->default(0);
 
             $table->enum('type', ['group', 'knockout', 'eightfinals', 'quarterfinals', 'semifinals', 'finals']);
+            $table->timestamp('start_at')->nullable();
 
             $table->timestamps();
         });

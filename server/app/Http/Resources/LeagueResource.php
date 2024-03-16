@@ -14,6 +14,13 @@ class LeagueResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->name,
+            'bet' => $this->bet,
+            'users' => UserResource::collection($this->users),
+            'user' => UserResource::make($this->user)
+        ];
     }
 }

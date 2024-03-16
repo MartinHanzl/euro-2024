@@ -33,6 +33,7 @@ class User extends Authentication implements JWTSubject
         'invitation_code',
         'active',
         'verified',
+        'points'
     ];
 
     /**
