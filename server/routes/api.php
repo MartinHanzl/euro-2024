@@ -36,6 +36,26 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => 'api'
+], function () {
+    Route::group([
+        'prefix' => 'teams'
+    ], function () {
+        Route::get('', [\App\Http\Controllers\TeamController::class, 'list']);
+        Route::get('{id}', [\App\Http\Controllers\TeamController::class, 'list'])->where('id', '[0-9]+');
+        Route::post('', [\App\Http\Controllers\TeamController::class, 'list']);
+        Route::post('{id}', [\App\Http\Controllers\TeamController::class, 'list'])->where('id', '[0-9]+');
+        Route::get('{id}', [\App\Http\Controllers\TeamController::class, 'list'])->where('id', '[0-9]+');
+    });
+
+    Route::group([
+        'prefix' => 'users',
+    ], function () {
+        Route::get('', [\App\Http\Controllers\Admin\UserController::class, 'list']);
+    });
+});
+
+Route::group([
     'prefix' => 'users',
     'middleware' => 'api'
 ], function () {
