@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('email:manager')->everyMinute();
+        $schedule->command('tips:calculate --full')->dailyAt('2:21')->withoutOverlapping();
+        $schedule->command('tips:calculate')->everyFiveMinutes()->withoutOverlapping();
     }
 
     /**
