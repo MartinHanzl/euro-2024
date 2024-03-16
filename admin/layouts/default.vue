@@ -138,13 +138,16 @@
     <header class="bg-white shadow">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-bold tracking-tight text-gray-900">
-          Dashboard
+          {{ authUser }}
         </h1>
       </div>
     </header>
     <main>
       <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-        <span @click="logout">Logout</span>
+        {{ authenticated }}
+        <p @click="logout">
+          Logout
+        </p>
         <slot />
       </div>
     </main>
@@ -177,14 +180,13 @@ const availableLocales = computed(() => {
 const router = useRouter();
 
 const { logUserOut } = useAuthStore();
-const { authUser } = storeToRefs(useAuthStore());
+const { authenticated, authUser } = storeToRefs(useAuthStore());
 
 const logout = () => {
   logUserOut();
   router.push('/login');
 };
 
-console.log(authUser);
 const navigation = [
   { name: 'Nástěnka', href: '#', current: true },
   { name: 'Základní skupina', href: '#', current: false },
