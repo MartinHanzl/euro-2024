@@ -3,7 +3,7 @@
     <Disclosure
       v-slot="{ open }"
       as="nav"
-      class="bg-gray-800"
+      class="bg-fullGray"
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -139,15 +139,15 @@
       </DisclosurePanel>
     </Disclosure>
 
-    <header class="bg-white shadow">
+    <header class="bg-fullGray shadow ring-1 ring-gray-500">
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-100">
           Nástěnka
         </h1>
       </div>
     </header>
     <main>
-      <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
         {{ $t('system.date') }}
         <p @click="logout">
           Logout
@@ -175,7 +175,7 @@ useHead({
 const router = useRouter();
 
 const { logUserOut } = useAuthStore();
-const { authenticated, authUser } = storeToRefs(useAuthStore());
+const { authUser } = storeToRefs(useAuthStore());
 
 const logout = () => {
   logUserOut();
@@ -185,7 +185,8 @@ const logout = () => {
 const navigation = [
   { name: 'Nástěnka', href: '/', current: true },
   { name: 'Základní skupina', href: '/zakladni-skupina', current: false },
-  { name: 'Vyřazovací část', href: '/vyrazovaci-cast', current: false }
+  { name: 'Vyřazovací část', href: '/vyrazovaci-cast', current: false },
+  { name: 'Ligy', href: '/ligy', current: false }
 ]
 
 if (authUser.value.role === 'admin' || authUser.value.role === 'employee') {
