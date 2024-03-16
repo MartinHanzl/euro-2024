@@ -11,11 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from '@headlessui/vue'
 
 definePageMeta({
   middleware: 'auth'

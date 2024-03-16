@@ -32,6 +32,14 @@ Route::group([
             Route::get('/profile', [MeController::class, 'profile']);
         });
     });
+
+});
+
+Route::group([
+    'prefix' => 'users',
+    'middleware' => 'api'
+], function () {
+    Route::get('', [\App\Http\Controllers\Admin\UserController::class, 'list']);
 });
 
 Route::group([
