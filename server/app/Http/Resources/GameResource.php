@@ -16,12 +16,12 @@ class GameResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'home_team' => TeamResource::collection($this->home_team_id),
-            'away_team' => TeamResource::collection($this->away_team_id),
             'home_goals' => (int)$this->home_goals,
             'away_goals' => (int)$this->away_goals,
             'type' => $this->type,
-            'group' => GroupResource::make($this->group),
+            'tips' => TipResource::collection($this->tips),
+            'home_team' => TeamResource::make($this->homeTeam),
+            'away_team' => TeamResource::make($this->awayTeam),
             'start_at' => $this->start_at
         ];
     }

@@ -14,7 +14,7 @@ class CalculatePoints extends Command
      *
      * @var string
      */
-    protected $signature = 'tips:calculate';
+    protected $signature = 'tips:calculate {--full : Calculate all tips}';
 
     /**
      * The console command description.
@@ -28,10 +28,16 @@ class CalculatePoints extends Command
      */
     public function handle()
     {
+        $full = (bool)$this->option('full');
+
         $this->output->info('Probíhá přepočítání bodů.');
-        $games = Game::with('tips')
-            //->where('start_at', '<=', Carbon::now())
-            ->get();
+        $query = Game::with('tips');
+
+        if (!$full) {
+            $query->where('start_at', '<=', Carbon::now()->startOfDay());
+        }
+
+        $games = $query->get();
 
         $this->output->progressStart(count($games));
 

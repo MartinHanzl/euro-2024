@@ -20,4 +20,19 @@ class Game extends Model
         'group_id',
         'start_at'
     ];
+
+    public function tips()
+    {
+        return $this->hasMany(Tip::class, 'game_id', 'id');
+    }
+
+    public function homeTeam()
+    {
+        return $this->hasOne(Team::class, 'id', 'home_team_id');
+    }
+
+    public function awayTeam()
+    {
+        return $this->hasOne(Team::class, 'id', 'away_team_id');
+    }
 }

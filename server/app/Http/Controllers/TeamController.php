@@ -2,27 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Client\Blog\PostResource;
 use App\Http\Resources\TeamResource;
-use App\Models\Blog\Post;
 use App\Models\Team;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Services\EmailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 
 class TeamController extends Controller
 {
     public function list(Request $request): JsonResponse
     {
-        return Response::json(
-            TeamResource::collection(Team::query()->get())
+        $teams = Team::with(['homeGames', 'awayGames'])->get();
+        return Response::json(TeamResource::collection($teams)
         );
     }
 
@@ -32,7 +25,7 @@ class TeamController extends Controller
             App::abort(400);
         }
 
-        $team = Team::query()->find($id);
+        $team = Team::with(['homeGames', 'awayGames'])->find($id);
 
         if (!$team) {
             App::abort(404);
@@ -45,6 +38,9 @@ class TeamController extends Controller
     {
         if ($id) {
             $team = Team::query()->find($id);
+            if (!$team) {
+                $team = new Team();
+            }
         } else {
             $team = new Team();
         }

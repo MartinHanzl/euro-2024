@@ -19,9 +19,7 @@ class TipResource extends JsonResource
             'home_goals' => (int)$this->home_goals,
             'away_goals' => (int)$this->away_goals,
             'booster' => (bool)$this->booster,
-            'points' => $this->points,
-            'user' => UserResource::make($this->user),
-            'game' => GameResource::make($this->game),
+            'points' => $this->points
         ];
     }
 }

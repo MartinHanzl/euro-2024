@@ -14,4 +14,9 @@ class Group extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function games()
+    {
+        return $this->hasMany(Game::class, 'group_id', 'id');
+    }
 }

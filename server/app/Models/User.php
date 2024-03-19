@@ -76,4 +76,9 @@ class User extends Authentication implements JWTSubject
     {
         return [];
     }
+
+    public function tips()
+    {
+        return $this->hasMany(Tip::class, 'user_id', 'id');
+    }
 }
