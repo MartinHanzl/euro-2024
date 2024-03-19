@@ -39,7 +39,6 @@ export const useAuthStore = defineStore('auth', {
                 const user = useCookie('user', {maxAge: 60*60*24*7});
                 user.value = me;
                 this.authUser = user.value;
-                console.log(user);
             }
         },
         logUserOut() {

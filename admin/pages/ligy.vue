@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="pb-8 mb-8 border-b-2 border-darkBlue">
-      <h1 class="w-full text-4xl">
+      <h1 class="w-full text-4xl font-bold">
         Ligy
       </h1>
     </div>

@@ -13,7 +13,6 @@ class UserController extends Controller
 {
     public function list(Request $request): JsonResponse
     {
-        dd($request->user());
         $query = User::query();
 
         if ($request->has('active')) {

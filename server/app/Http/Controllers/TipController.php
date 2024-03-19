@@ -15,7 +15,7 @@ class TipController extends Controller
     public function list(Request $request): JsonResponse
     {
         $tips = Tip::query()
-            ->where('user_id', '=', 1) // TODO
+            ->where('user_id', '=', $request->user()->id)
             ->get();
 
         return Response::json(TipResource::collection($tips));
@@ -29,7 +29,7 @@ class TipController extends Controller
 
         $tip = Tip::query()
             ->where('id', '=', $id)
-            ->where('user_id', '=', 1) // TODO
+            ->where('user_id', '=', $request->user()->id)
             ->first();
 
         if (!$tip) {
@@ -55,7 +55,7 @@ class TipController extends Controller
 
         if ($id) {
             $tip = Tip::query()
-                ->where('user_id', '=', 1) // TODO
+                ->where('user_id', '=', $request->user()->id)
                 ->find($id);
         } else {
             $tip = new Tip();
@@ -75,7 +75,7 @@ class TipController extends Controller
         }
 
         $tip = Tip::query()
-            ->where('user_id', '=', 1) // TODO
+            ->where('user_id', '=', $request->user()->id)
             ->find($id);
 
         if (!$tip) {

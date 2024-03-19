@@ -1,25 +1,41 @@
 <template>
   <div>
     <div class="pb-8 mb-8 border-b-2 border-darkBlue">
-      <h1 class="w-full text-4xl">
+      <h1 class="w-full text-4xl font-bold">
         Základní skupina
       </h1>
     </div>
     <div class="grid grid-cols-2 gap-12">
-      <div class="shadow rounded">
-        <div class="bg-darkBlue pl-4 md:pl-8 pt-2 md:pt-4 pb-2 md:pb-4 pr-4 md:pr-8 rounded-t">
-          <h2 class="text-slate-200 font-bold">
-            Vaše ligy
-          </h2>
-        </div>
-      </div>
+      {{ games }}
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import {useAsyncData} from "#app";
 
 definePageMeta({
   middleware: 'auth'
 })
+const apiBase = useRuntimeConfig().public.apiBase;
+const token = useCookie('token').value;
+
+const {data: games, pending, error, refresh} = useAsyncData(
+    'games',
+    async () => {
+      const [users] = await Promise.all([
+        $fetch(`${apiBase}/api/games`, {
+          method: 'GET',
+          params: {
+            type: 'group'
+          },
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+      ])
+      return {users};
+    }
+);
 </script>

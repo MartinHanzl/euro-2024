@@ -15,14 +15,22 @@ class GameController extends Controller
 {
     public function list(Request $request): JsonResponse
     {
-        $games = Game::with([
+        $query = Game::with([
             'homeTeam',
             'awayTeam',
-        ])->get();
+        ]);
+
+        if ($request->has('type')) {
+            $query->where('type', '=', $request->get('type'));
+        } else {
+            $query->where('type', '!=', 'group');
+        }
+
+        $games = $query->get();
 
         foreach ($games as $game) {
             $game->tips = Tip::query()
-                ->where('user_id', '=', 1) // TODO
+                ->where('user_id', '=', $request->user()->id)
                 ->get();
         }
 
