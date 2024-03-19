@@ -1,7 +1,6 @@
 // store/auth.ts
 
 import { defineStore } from 'pinia';
-import { useCookie } from '~/node_modules/nuxt/app';
 
 interface UserPayloadInterface {
     username: string;

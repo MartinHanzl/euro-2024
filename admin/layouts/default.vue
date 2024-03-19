@@ -3,7 +3,7 @@
     <Disclosure
       v-slot="{ open }"
       as="nav"
-      class="bg-fullGray"
+      class="bg-slate-200 shadow-2xl"
     >
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
@@ -21,7 +21,7 @@
                   v-for="item in navigation"
                   :key="item.name"
                   :to="item.href"
-                  :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
+                  :class="[item.current ? 'border-2 border-darkBlue text-darkBlue' : 'text-darkBlue hover:bg-darkBlue hover:text-white', 'rounded-full px-4 py-2 text-sm font-bold']"
                   :aria-current="item.current ? 'page' : undefined"
                 >
                   {{ item.name }}
@@ -138,14 +138,6 @@
         </div>
       </DisclosurePanel>
     </Disclosure>
-
-    <header class="bg-fullGray shadow ring-1 ring-gray-500">
-      <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-100">
-          Nástěnka
-        </h1>
-      </div>
-    </header>
     <main>
       <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
         {{ $t('system.date') }}
