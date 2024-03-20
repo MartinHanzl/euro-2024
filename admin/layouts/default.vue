@@ -139,8 +139,7 @@
       </DisclosurePanel>
     </Disclosure>
     <main>
-      <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
-        {{ $t('system.date') }}
+      <div class="mx-4 lg:mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
         <p @click="logout">
           Logout
         </p>

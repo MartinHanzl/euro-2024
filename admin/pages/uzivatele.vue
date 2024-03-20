@@ -5,16 +5,79 @@
         Uživatelé
       </h1>
     </div>
-    <p v-if="pending">
-      Loading
-    </p>
-    <p
-      v-for="user in users.users"
-      v-else
-      :key="user.id"
-    >
-      {{ user.email }}
-    </p>
+    <div>
+      <table
+        v-if="users"
+        class="w-full rounded-2xl border-collapse bg-white text-left text-sm text-slate-500"
+      >
+        <thead class="bg-slate-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-4 font-bold text-slate-900"
+            >
+              ID
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-4 font-bold text-slate-900"
+            >
+              Jméno a příjmení
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-4 font-bold text-slate-900"
+            >
+              Email
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-4 font-bold text-slate-900"
+            >
+              Stav
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-4 font-bold text-slate-900"
+            >
+              Akce
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 border-t border-slate-100">
+          <tr
+            v-for="user in users.users"
+            :key="user.id"
+            class="hover:bg-slate-50"
+          >
+            <td class="px-6 py-4">
+              {{ user.id }}
+            </td>
+            <td class="px-6 py-4">
+              {{ user.firstname + ' ' + user.lastname }}
+            </td>
+            <td class="px-6 py-4">
+              {{ user.email }}
+            </td>
+            <td class="px-6 py-4">
+              <span
+                v-if="user.verified"
+                class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2 py-1 text-xs font-semibold text-green-600"
+              >
+                Ověřený
+              </span>
+              <span
+                v-else
+                class="inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-500"
+              >
+                Čeká na schválení
+              </span>
+            </td>
+            <td class="px-6 py-4" />
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 

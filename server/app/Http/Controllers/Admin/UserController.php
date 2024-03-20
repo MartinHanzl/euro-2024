@@ -18,6 +18,9 @@ class UserController extends Controller
         if ($request->has('active')) {
             $query->where('active', '=', 1);
         }
+
+        $query->orderBy('id', 'DESC');
+
         $users = $query->get();
         return Response::json(UserResource::collection($users));
     }

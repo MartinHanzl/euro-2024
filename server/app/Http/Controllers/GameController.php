@@ -29,9 +29,9 @@ class GameController extends Controller
         $games = $query->get();
 
         foreach ($games as $game) {
-            $game->tips = Tip::query()
+            $game->tip = Tip::query()
                 ->where('user_id', '=', $request->user()->id)
-                ->get();
+                ->first();
         }
 
         return Response::json(GameResource::collection($games));

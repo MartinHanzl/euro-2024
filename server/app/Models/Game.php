@@ -21,7 +21,7 @@ class Game extends Model
         'start_at'
     ];
 
-    public function tips()
+    public function tip()
     {
         return $this->hasMany(Tip::class, 'game_id', 'id');
     }
