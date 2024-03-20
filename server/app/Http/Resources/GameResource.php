@@ -20,6 +20,7 @@ class GameResource extends JsonResource
             'away_goals' => (int)$this->away_goals,
             'type' => $this->type,
             'tip' => TipResource::make($this->tip),
+            'group' => GroupResource::make($this->group),
             'home_team' => TeamResource::make($this->homeTeam),
             'away_team' => TeamResource::make($this->awayTeam),
             'start_at' => $this->start_at

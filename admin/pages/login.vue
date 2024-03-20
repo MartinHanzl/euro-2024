@@ -1,13 +1,8 @@
 <template>
   <div class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-      <img
-        class="mx-auto h-10 w-auto"
-        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-        alt="Your Company"
-      >
       <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-        Sign in to your account
+        Přihlášení
       </h2>
     </div>
 
@@ -20,7 +15,9 @@
           <label
             for="email"
             class="block text-sm font-medium leading-6 text-gray-900"
-          >Email address</label>
+          >
+            E-mail
+          </label>
           <div class="mt-2">
             <input
               id="email"
@@ -39,7 +36,9 @@
             <label
               for="password"
               class="block text-sm font-medium leading-6 text-gray-900"
-            >Password</label>
+            >
+              Heslo
+            </label>
           </div>
           <div class="mt-2">
             <input
@@ -59,7 +58,7 @@
             type="submit"
             class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Sign in
+            Přihlásit se
           </button>
         </div>
       </form>
@@ -69,11 +68,11 @@
 
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia'; // import storeToRefs helper hook from pinia
-import { useAuthStore } from '@/store/auth'; // import the auth store we just created
+import {storeToRefs} from 'pinia'; // import storeToRefs helper hook from pinia
+import {useAuthStore} from '@/store/auth'; // import the auth store we just created
 
-const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
-const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+const {authenticateUser} = useAuthStore(); // use authenticateUser action from  auth store
+const {authenticated} = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
 definePageMeta({
   layout: 'login'

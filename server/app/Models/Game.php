@@ -35,4 +35,9 @@ class Game extends Model
     {
         return $this->hasOne(Team::class, 'id', 'away_team_id');
     }
+
+    public function group()
+    {
+        return $this->hasOne(Group::class, 'id', 'group_id');
+    }
 }
